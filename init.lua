@@ -91,21 +91,19 @@ vim.api.nvim_set_keymap('n', '<leader>u', ':lua Snacks.picker.undo()<CR>', { nor
 vim.api.nvim_set_keymap('n', '<leader>c', ':lua Snacks.picker.colorschemes()<CR>', { noremap = true, silent = true })
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+-- vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>i', ':Telescope find_files cwd=~/cpp_template_library<CR>', { desc = 'templates'})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+-- vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+-- vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+-- vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 
 vim.api.nvim_set_keymap('n', '<leader>\\', ':Commentary<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<leader>\\', ':Commentary<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>/', ':Commentary<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<leader>/', ':Commentary<CR>', { noremap = true, silent = true })
 
 
 -- vim.o.background = "dark" 
-vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd[[colorscheme everforest]]
 
 
 vim.g.loaded_netrw = 1
@@ -222,3 +220,28 @@ require("telescope").setup({
 
 
 require('transparent').clear_prefix('lualine_c')
+require('transparent').clear_prefix('incline')
+
+
+vim.api.nvim_create_user_command("MakeTransparent", function()
+  vim.cmd([[
+    hi Normal guibg=NONE ctermbg=NONE
+    hi NormalNC guibg=NONE ctermbg=NONE
+    hi EndOfBuffer guibg=NONE ctermbg=NONE
+    hi VertSplit guibg=NONE ctermbg=NONE
+    hi SignColumn guibg=NONE ctermbg=NONE
+    hi LineNr guibg=NONE ctermbg=NONE
+    hi CursorLineNR guibg=NONE ctermbg=NONE
+    hi TabLine guibg=NONE ctermbg=NONE
+    hi TabLineFill guibg=NONE ctermbg=NONE
+    hi TabLineSel guibg=NONE ctermbg=NONE
+    hi WinBar guibg=NONE ctermbg=NONE
+    hi WinBarNC guibg=NONE ctermbg=NONE
+    hi Pmenu guibg=NONE ctermbg=NONE
+    hi PmenuSel guibg=NONE ctermbg=NONE
+    hi FloatBorder guibg=NONE ctermbg=NONE
+    hi NormalFloat guibg=NONE ctermbg=NONE
+  ]])
+end, {})
+
+vim.cmd("MakeTransparent")
