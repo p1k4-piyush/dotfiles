@@ -1,4 +1,4 @@
-
+require("config.lazy")
 -- Basic settings
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -18,6 +18,34 @@ vim.opt.syntax = 'on'
 vim.opt.filetype = 'indent'  
 vim.opt.belloff = 'all'
 
+vim.lsp.config.clangd = {
+  cmd = { 'clangd', '--background-index' },
+  root_markers = { 'compile_commands.json', 'compile_flags.txt' },
+  filetypes = { 'c', 'cpp' },
+}
+
+vim.lsp.enable({'clangd'})
+vim.diagnostic.config({
+  -- Use the default configuration
+  virtual_lines = true
+
+  -- Alternatively, customize specific options
+  -- virtual_lines = {
+  --  -- Only show virtual line diagnostics for the current cursor line
+  --  current_line = true,
+  -- },
+})
+
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(ev)
+--     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+--     if client:supports_method('textDocument/completion') then
+--       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+--     end
+--   end,
+-- })
+
+
 -- Key mappings for clipboard copy/paste
 vim.keymap.set('n', 'y', '"+y')
 vim.keymap.set('n', 'p', '"+p')
@@ -32,6 +60,8 @@ vim.keymap.set("v", "<Del>", '"_d')
 
 vim.opt.clipboard:append("unnamedplus")
 vim.g.mapleader = " "
+
+-- require'lspconfig'.clangd.setup{}
 
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-a>', '<Esc>ggVG<CR>', { noremap = true })
@@ -51,13 +81,14 @@ vim.api.nvim_set_keymap('n', '<leader>x', ':Debug -t 1<CR>:vertical resize 100<C
 vim.api.nvim_set_keymap('n', '<leader>z', ':Debug <CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>p', ':lua Snacks.picker.files()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>b', ':lua Snacks.picker.buffers()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>h', ':lua Snacks.picker.command_history()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>n', ':lua Snacks.notifier.show_history()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>t', ':lua Snacks.explorer()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>k', ':lua Snacks.terminal.toggle()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rg', ':lua Snacks.picker.registers()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>u', ':lua Snacks.picker.undo()<CR>', { noremap = true, silent = true })
-require("config.lazy")
+vim.api.nvim_set_keymap('n', '<leader>c', ':lua Snacks.picker.colorschemes()<CR>', { noremap = true, silent = true })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -81,8 +112,6 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
-require("bufferline").setup{}
-
 require("noice").setup({
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -101,35 +130,6 @@ require("noice").setup({
     lsp_doc_border = false, -- add a border to hover docs and signature help
   },
 })
-
--- vim.api.nvim_create_autocmd('BufRead', {
---   pattern = '*.cpp',
---   callback = function()
---     local lines = vim.fn.getline(1, '$')
---     local first_non_comment = 1
-
---     for i,line in ipairs(lines) do
---         if not string.match(line,'^%s*//') then
---             first_non_comment = i
---             break
---         end
---     end
-
---     if first_non_comment > 1 then
---         vim.fn.setline(1,vim.list_slice(lines,first_non_comment));
---     end
-
---     local lyrics = Select_Lyric()
---     if lyrics ~= '' then
---         lyric_lines = vim.fn.split(lyrics, '\n')
---         for i, line in ipairs(lyric_lines) do
---             vim.fn.append(i-1, '//  ' .. line)
---         end
-
---     vim.fn.append(#lyric_lines, '')
---     end
---   end
--- })
 
 
 vim.api.nvim_create_autocmd('BufRead', {
@@ -221,4 +221,4 @@ require("telescope").setup({
 })
 
 
-
+require('transparent').clear_prefix('lualine_c')
