@@ -403,7 +403,7 @@ require("lazy").setup({
                     file_ignore_patterns = { "node_modules", "dist", "*.o", "*.out" },
                 },
             })
-            vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true, silent = true })
+            -- vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true, silent = true })
         end,
     },
     {

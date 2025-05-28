@@ -77,8 +77,8 @@ vim.keymap.set("n", "<leader>[c", function()
   require("treesitter-context").go_to_context(vim.v.count1)
 end, { silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>q', ':Test<CR>:vertical resize 150<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>x', ':Debug -t 1<CR>:vertical resize 150<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>q', ':Test<CR>:vertical resize 100<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>x', ':Debug -t 1<CR>:vertical resize 100<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>z', ':Debug <CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>p', ':lua Snacks.picker.files()<CR>', { noremap = true, silent = true })
@@ -90,6 +90,8 @@ vim.api.nvim_set_keymap('n', '<leader>k', ':lua Snacks.terminal.toggle()<CR>', {
 vim.api.nvim_set_keymap('n', '<leader>rg', ':lua Snacks.picker.registers()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>u', ':lua Snacks.picker.undo()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>c', ':lua Snacks.picker.colorschemes()<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>f', ':lua vim.lsp.buf.format()<CR>', { noremap = true, silent = true })
 
 local builtin = require('telescope.builtin')
 -- vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
