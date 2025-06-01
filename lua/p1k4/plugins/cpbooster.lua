@@ -1,3 +1,3 @@
 return {
-        "searleser97/cpbooster.vim",
-    }
+	"searleser97/cpbooster.vim",
+}

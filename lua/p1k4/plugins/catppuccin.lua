@@ -1,4 +1,4 @@
 return {
-    "catppuccin/nvim", 
-    name = "catppuccin",
+	"catppuccin/nvim",
+	name = "catppuccin",
 }
