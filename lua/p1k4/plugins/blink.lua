@@ -29,7 +29,6 @@ return {
 	lazy = false,
 	opts = {
 		chartoggle = { enabled = true },
-		indent = { enabled = true },
 		tree = { enabled = false },
 	},
 }
