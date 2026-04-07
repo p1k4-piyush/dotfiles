@@ -1,5 +1,2 @@
-return {
-	"windwp/nvim-autopairs",
-	event = "InsertEnter",
-	config = true,
-}
+-- nvim-autopairs
+require("nvim-autopairs").setup()

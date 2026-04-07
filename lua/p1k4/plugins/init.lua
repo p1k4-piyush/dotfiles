@@ -1,4 +1,31 @@
-return {
-	-- require("p1k4.plugins.gruvbox"),
-	-- add other plugins here
-}
+-- ============================================================
+-- Plugin Configs — p1k4 Neovim 0.12
+-- Each file calls require().setup() for its plugin
+-- ============================================================
+
+require("p1k4.plugins.catppuccin")
+require("p1k4.plugins.snacks")
+require("p1k4.plugins.blink-cmp")
+require("p1k4.plugins.blink")
+require("p1k4.plugins.colorful-menu")
+require("p1k4.plugins.treesitter")
+require("p1k4.plugins.treesitter-context")
+require("p1k4.plugins.noice")
+require("p1k4.plugins.notify")
+require("p1k4.plugins.lualine")
+require("p1k4.plugins.incline")
+require("p1k4.plugins.transparent")
+require("p1k4.plugins.which-key")
+require("p1k4.plugins.nvim-scrollbar")
+require("p1k4.plugins.conform")
+require("p1k4.plugins.autopairs")
+require("p1k4.plugins.nvim-surround")
+require("p1k4.plugins.todo-comments")
+require("p1k4.plugins.trouble")
+require("p1k4.plugins.flash")
+require("p1k4.plugins.telescope")
+require("p1k4.plugins.gitsigns")
+require("p1k4.plugins.lazygit")
+require("p1k4.plugins.markview")
+require("p1k4.plugins.nvim-colorizer")
+require("p1k4.plugins.cpbooster")

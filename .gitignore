@@ -8,10 +8,13 @@
 Session.vim
 .lsp_log
 
-# Package manager lock file
-lazy-lock.json
-
 # OS generated files
 .DS_Store
 .DS_Store?
 ._*
+
+# Backup of pre-migration config
+old/
+
+# Implementation plan (not part of config)
+implementation_plan.md

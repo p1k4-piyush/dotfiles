@@ -1,46 +1,62 @@
+-- ============================================================
+-- LSP — p1k4 Neovim 0.12
+-- ============================================================
+
+-- ── clangd (C/C++) ─────────────────────────────────────────
 vim.lsp.config.clangd = {
 	cmd = { "clangd", "--background-index", "--clang-tidy" },
 	root_markers = { "compile_commands.json", "compile_flags.txt" },
 	filetypes = { "c", "cpp" },
 }
+
+-- ── pylsp (Python) ─────────────────────────────────────────
 vim.lsp.config.pylsp = {
-	cmd = { "pylsp" }, -- or full path: "/path/to/.venv/bin/pylsp"
+	cmd = { "pylsp" },
 	root_markers = { "pyproject.toml", "setup.cfg", "setup.py", "requirements.txt", ".git" },
 	filetypes = { "python" },
 	settings = {
-		-- pylsp plugin settings (enable/disable plugins as you prefer)
 		pylsp = {
 			plugins = {
 				pyflakes = { enabled = true },
-				pycodestyle = { enabled = false }, -- disable if you use ruff/black
+				pycodestyle = { enabled = false },
 				pyls_mypy = { enabled = false },
 				yapf = { enabled = false },
-				black = { enabled = true }, -- enable black if installed
-				pylsp_rope = { enabled = false }, -- example: disable rope if not used
+				black = { enabled = true },
+				pylsp_rope = { enabled = false },
 			},
 		},
 	},
 }
 
-vim.lsp.enable({ "clangd" })
-vim.lsp.enable({ "pylsp" })
+-- ── lua_ls (Lua / Neovim config) ───────────────────────────
+vim.lsp.config.lua_ls = {
+	cmd = { "lua-language-server" },
+	root_markers = { ".luarc.json", ".luarc.jsonc", ".git" },
+	filetypes = { "lua" },
+	settings = {
+		Lua = {
+			runtime = { version = "LuaJIT" },
+			workspace = {
+				checkThirdParty = false,
+				library = { vim.env.VIMRUNTIME },
+			},
+		},
+	},
+}
 
+-- ── Enable servers ─────────────────────────────────────────
+vim.lsp.enable({ "clangd", "pylsp", "lua_ls" })
+
+-- ── Diagnostics config ────────────────────────────────────
 vim.diagnostic.config({
-	-- Use the default configuration
 	virtual_lines = true,
-
-	-- Alternatively, customize specific options
-	-- virtual_lines = {
-	--  -- Only show virtual line diagnostics for the current cursor line
-	--  current_line = true,
-	-- },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.HINT] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+	},
+	severity_sort = true,
 })
-
--- vim.api.nvim_create_autocmd('LspAttach', {
---   callback = function(ev)
---     local client = vim.lsp.get_client_by_id(ev.data.client_id)
---     if client:supports_method('textDocument/completion') then
---       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
---     end
---   end,
--- })
