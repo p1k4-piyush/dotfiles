@@ -47,7 +47,6 @@ vim.pack.add({
   gh("kylechui/nvim-surround"),
   gh("folke/todo-comments.nvim"),
   gh("folke/flash.nvim"),
-  gh("nvim-telescope/telescope.nvim"),
   gh("catgoose/nvim-colorizer.lua"),
 
   -- ── Git ───────────────────────────────────────────────────

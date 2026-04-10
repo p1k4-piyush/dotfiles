@@ -41,3 +41,16 @@ map("n", "<leader>rg", function() Snacks.picker.registers() end, { desc = "Regis
 map("n", "<leader>u", function() Snacks.picker.undo() end, { desc = "Undo History" })
 map("n", "<leader>c", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
 map("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Live Grep" })
+map("n", "<leader>i", function()
+	Snacks.picker.files({
+		cwd = vim.fn.expand("~/Documents/templates"),
+		confirm = function(picker, item)
+			picker:close()
+			if not item then return end
+			local filepath = item.file or item.path or item[1]
+			if not filepath then return end
+			local content = vim.fn.readfile(filepath)
+			vim.api.nvim_put(content, "l", false, true)
+		end,
+	})
+end, { desc = "CP Templates" })

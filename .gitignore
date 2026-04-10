@@ -16,5 +16,6 @@ Session.vim
 # Backup of pre-migration config
 old/
 
-# Implementation plan (not part of config)
-implementation_plan.md
+# Plugin lock file
+nvim-pack-lock.json
+.gitignore
